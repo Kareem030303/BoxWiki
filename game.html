@@ -1,37 +1,7 @@
-<!DOCTYPE html>
+🥊 Fighter selection (Tyson vs Ali stats)<!DOCTYPE html>
 <html>
 <head>
-<title>My First Boxing Game</title>
-</head>
-<body>
-
-<h1>🥊 Boxing Game</h1>
-
-</body>
-</html><h1>🥊 Boxing Game</h1>
-
-<div>🤖 Enemy</div>
-
-<button>Punch</button><div>Enemy HP: <span id="hp">100</span></div>
-
-<button onclick="punch()">Punch 👊</button>
-
-<script>
-let hp = 100;
-
-function punch(){
-    hp = hp - 10;
-    document.getElementById("hp").innerHTML = hp;
-
-    if(hp <= 0){
-        alert("You won 🏆");
-    }
-}
-</script>let damage = Math.floor(Math.random() * 20) + 5;
-<!DOCTYPE html>
-<html>
-<head>
-<title>2 Player Boxing Game</title>
+<title>Boxing Game v3</title>
 
 <style>
 body{
@@ -42,92 +12,189 @@ body{
     padding:20px;
 }
 
+.hidden{display:none;}
+
+.card{
+    background:#1c1c1c;
+    padding:15px;
+    border-radius:12px;
+    margin:10px;
+    cursor:pointer;
+    display:inline-block;
+    width:200px;
+}
+
 .container{
     display:flex;
     justify-content:space-around;
     margin-top:20px;
 }
 
-.card{
-    background:#1c1c1c;
-    padding:20px;
-    border-radius:12px;
-    width:40%;
+.bar{
+    height:12px;
+    background:#333;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:gold;
+    width:100%;
 }
 
 button{
-    padding:12px;
-    margin-top:20px;
+    padding:10px;
+    margin:10px;
     border:none;
     border-radius:8px;
     cursor:pointer;
 }
 
 #result{
-    margin-top:20px;
+    margin-top:15px;
     font-size:22px;
     color:gold;
 }
 </style>
-
 </head>
 
 <body>
 
-<h1>🥊 2 Player Boxing Match</h1>
+<h1>🥊 Boxing Game v3</h1>
+
+<!-- 🥊 FIGHTER SELECT SCREEN -->
+<div id="selectScreen">
+
+<h2>Select Your Fighter</h2>
+
+<div class="card" onclick="selectPlayer('Tyson')">Mike Tyson</div>
+<div class="card" onclick="selectPlayer('Ali')">Muhammad Ali</div>
+<div class="card" onclick="selectPlayer('Mayweather')">Floyd Mayweather</div>
+
+<h2>Select AI Fighter</h2>
+
+<div class="card" onclick="selectAI('Tyson')">Mike Tyson</div>
+<div class="card" onclick="selectAI('Ali')">Muhammad Ali</div>
+<div class="card" onclick="selectAI('Mayweather')">Floyd Mayweather</div>
+
+<br>
+<button onclick="startGame()">Start Fight 🥊</button>
+
+</div>
+
+<!-- 🥊 GAME SCREEN -->
+<div id="gameScreen" class="hidden">
+
+<h2 id="round">Round 1 / 5</h2>
 
 <div class="container">
 
-<div class="card">
-<h2>Player 1 🥊</h2>
-<p>HP: <span id="p1hp">100</span></p>
-<button id="p1btn" onclick="p1Attack()">Punch Player 2</button>
+<div>
+<h3 id="playerName">Player</h3>
+<p>HP: <span id="pHp">100</span></p>
+<div class="bar"><div class="fill" id="pBar"></div></div>
+<button onclick="attack()">Punch 👊</button>
 </div>
 
-<div class="card">
-<h2>Player 2 🤖</h2>
-<p>HP: <span id="p2hp">100</span></p>
-<button id="p2btn" onclick="p2Attack()">Punch Player 1</button>
+<div>
+<h3 id="aiName">AI</h3>
+<p>HP: <span id="eHp">100</span></p>
+<div class="bar"><div class="fill" id="eBar"></div></div>
 </div>
 
 </div>
 
 <div id="result"></div>
 
+</div>
+
 <script>
 
-let p1 = 100;
-let p2 = 100;
+let fighters = {
+"Tyson": {hp:100, power:15},
+"Ali": {hp:100, power:10},
+"Mayweather": {hp:100, power:8}
+};
 
-function p1Attack(){
+let player = "Tyson";
+let ai = "Ali";
 
-if(p1 <= 0 || p2 <= 0) return;
+let pHp = 100;
+let eHp = 100;
 
-let dmg = Math.floor(Math.random() * 15) + 5;
-p2 -= dmg;
+let round = 1;
+let maxRounds = 5;
 
-document.getElementById("p2hp").innerHTML = p2;
+function selectPlayer(name){
+player = name;
+alert("Player selected: " + name);
+}
 
-if(p2 <= 0){
-    document.getElementById("result").innerHTML = "🏆 Player 1 Wins by KO!";
+function selectAI(name){
+ai = name;
+alert("AI selected: " + name);
+}
+
+function startGame(){
+
+document.getElementById("selectScreen").classList.add("hidden");
+document.getElementById("gameScreen").classList.remove("hidden");
+
+document.getElementById("playerName").innerText = player;
+document.getElementById("aiName").innerText = ai;
+
+pHp = fighters[player].hp;
+eHp = fighters[ai].hp;
+
+update();
+}
+
+function update(){
+
+document.getElementById("pHp").innerText = pHp;
+document.getElementById("eHp").innerText = eHp;
+
+document.getElementById("pBar").style.width = pHp + "%";
+document.getElementById("eBar").style.width = eHp + "%";
+
+document.getElementById("round").innerText = "Round " + round + " / " + maxRounds;
+}
+
+function attack(){
+
+let dmg = fighters[player].power + Math.floor(Math.random() * 10);
+eHp -= dmg;
+
+update();
+
+if(eHp <= 0){
+    endGame(player + " Wins by KO 🏆");
+    return;
+}
+
+setTimeout(aiAttack, 800);
+}
+
+function aiAttack(){
+
+let dmg = fighters[ai].power + Math.floor(Math.random() * 8);
+pHp -= dmg;
+
+update();
+
+if(pHp <= 0){
+    endGame(ai + " Wins by KO 🤖");
 }
 }
 
-function p2Attack(){
-
-if(p1 <= 0 || p2 <= 0) return;
-
-let dmg = Math.floor(Math.random() * 15) + 5;
-p1 -= dmg;
-
-document.getElementById("p1hp").innerHTML = p1;
-
-if(p1 <= 0){
-    document.getElementById("result").innerHTML = "🏆 Player 2 Wins by KO!";
+function endGame(text){
+document.getElementById("result").innerText = text;
 }
-}
+
+update();
 
 </script>
 
 </body>
-    </html>
+</html>
