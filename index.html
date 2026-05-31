@@ -386,3 +386,29 @@ Deontay Wilder is known for one-punch knockout power in the heavyweight division
 
 </body>
 </html>
+<input type="text" id="searchInput" placeholder="Search boxers..." onkeyup="searchBoxers()"><script>
+function searchBoxers() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.getElementsByClassName("card");
+
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].getElementsByTagName("h3")[0];
+        if (name) {
+            let text = name.textContent || name.innerText;
+
+            if (text.toLowerCase().includes(input)) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>#searchInput {
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
