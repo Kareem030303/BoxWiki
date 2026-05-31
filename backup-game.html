@@ -1,12 +1,168 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Boxing Career Backup</title>
+<title>🥊 Boxing Career Mode</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    background:#1c1c1c;
+    padding:15px;
+    margin:10px;
+    border-radius:12px;
+}
+
+button{
+    padding:12px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.bar{
+    background:#333;
+    height:12px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:gold;
+    width:100%;
+}
+
+#result{
+    color:gold;
+    font-size:20px;
+}
+</style>
+
 </head>
 
 <body>
 
-<h1>🥊 Boxing Game</h1>
+<h1>🥊 Boxing Career Mode</h1>
+
+<!-- RECORD -->
+<div class="card">
+<h3>📊 Career Record</h3>
+<p>Fights: <span id="fights">0</span></p>
+<p>Wins: <span id="wins">0</span></p>
+<p>Losses: <span id="losses">0</span></p>
+<p>KO Wins: <span id="kos">0</span></p>
+</div>
+
+<!-- START -->
+<div id="startScreen" class="card">
+<h2>Your Career Begins</h2>
+<p>Start as a rookie and climb the rankings 🥊</p>
+<button onclick="startCareer()">Start Career</button>
+</div>
+
+<!-- FIGHT -->
+<div id="fightScreen" style="display:none">
+
+<h2 id="rank">Rookie</h2>
+<h3 id="opponent">Opponent</h3>
+
+<p>HP: <span id="hp">100</span></p>
+
+<div class="bar"><div class="fill" id="bar"></div></div>
+
+<button onclick="punch()">Punch 👊</button>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+// RECORD SYSTEM
+let record = JSON.parse(localStorage.getItem("record")) || {
+wins: 0,
+losses: 0,
+kos: 0,
+fights: 0
+};
+
+// CAREER SYSTEM
+let ranks = [
+"Rookie",
+"Amateur",
+"Regional Fighter",
+"National Contender",
+"World Ranked",
+"Champion"
+];
+
+let rankIndex = 0;
+
+let hp = 100;
+
+function updateRecord(){
+document.getElementById("fights").innerText = record.fights;
+document.getElementById("wins").innerText = record.wins;
+document.getElementById("losses").innerText = record.losses;
+document.getElementById("kos").innerText = record.kos;
+}
+
+function startCareer(){
+document.getElementById("startScreen").style.display = "none";
+document.getElementById("fightScreen").style.display = "block";
+loadFight();
+}
+
+function loadFight(){
+hp = 100;
+
+document.getElementById("hp").innerText = hp;
+document.getElementById("bar").style.width = "100%";
+
+document.getElementById("rank").innerText = ranks[rankIndex];
+document.getElementById("opponent").innerText = "Opponent: " + ranks[rankIndex];
+
+document.getElementById("result").innerText = "";
+}
+
+function punch(){
+
+let dmg = Math.floor(Math.random() * 15) + 5;
+hp -= dmg;
+
+document.getElementById("hp").innerText = hp;
+document.getElementById("bar").style.width = hp + "%";
+
+if(hp <= 0){
+
+record.wins++;
+record.fights++;
+record.kos++;
+
+rankIndex++;
+
+document.getElementById("result").innerText =
+"🏆 You won the fight! You move up!";
+
+localStorage.setItem("record", JSON.stringify(record));
+
+updateRecord();
+
+setTimeout(loadFight, 1500);
+}
+}
+
+updateRecord();
+
+</script>
 
 </body>
 </html>
