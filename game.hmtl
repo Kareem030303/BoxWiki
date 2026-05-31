@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My First Boxing Game</title>
+</head>
+<body>
+
+<h1>🥊 Boxing Game</h1>
+
+</body>
+</html><h1>🥊 Boxing Game</h1>
+
+<div>🤖 Enemy</div>
+
+<button>Punch</button><div>Enemy HP: <span id="hp">100</span></div>
+
+<button onclick="punch()">Punch 👊</button>
+
+<script>
+let hp = 100;
+
+function punch(){
+    hp = hp - 10;
+    document.getElementById("hp").innerHTML = hp;
+
+    if(hp <= 0){
+        alert("You won 🏆");
+    }
+}
+</script>let damage = Math.floor(Math.random() * 20) + 5;
