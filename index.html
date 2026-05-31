@@ -804,3 +804,118 @@ function vote(){
     "Votes: " + count;
 }
 </script> 
+<button onclick="simulateFight()">Simulate Fight</button>
+
+<div id="fightLog"></div>
+
+<div id="scorecard"></div>function simulateFight() {
+
+  const fighter1 = "Muhammad Ali";
+  const fighter2 = "Mike Tyson";
+
+  let aliScore = 0;
+  let tysonScore = 0;
+
+  let commentary = "";
+  let scorecard = "";
+
+  const comments = [
+    `${fighter1} lands a sharp jab.`,
+    `${fighter2} connects with a powerful hook.`,
+    `${fighter1} controls the distance.`,
+    `${fighter2} pressures aggressively.`,
+    `${fighter1} wins the exchange.`,
+    `${fighter2} rocks his opponent with a big shot.`,
+    `The crowd erupts after a heavy combination.`,
+    `Both fighters trade punches in the center of the ring.`
+  ];
+
+  for (let round = 1; round <= 12; round++) {
+
+    let winner = Math.random();
+
+    let roundComment =
+      comments[Math.floor(Math.random() * comments.length)];
+
+    commentary += `
+      <div class="round">
+        <h3>Round ${round}</h3>
+        <p>${roundComment}</p>
+      </div>
+    `;
+
+    if (winner > 0.5) {
+      aliScore += 10;
+      tysonScore += 9;
+
+      scorecard += `
+        <p>Round ${round}: ${fighter1} 10-9</p>
+      `;
+    } else {
+      tysonScore += 10;
+      aliScore += 9;
+
+      scorecard += `
+        <p>Round ${round}: ${fighter2} 10-9</p>
+      `;
+    }
+  }
+
+  let result = "";
+
+  if (aliScore > tysonScore) {
+    result = `${fighter1} wins by Unanimous Decision`;
+  } else if (tysonScore > aliScore) {
+    result = `${fighter2} wins by Unanimous Decision`;
+  } else {
+    result = "Fight ends in a Draw";
+  }
+
+  document.getElementById("fightLog").innerHTML =
+    `<h2>Fight Commentary</h2>${commentary}`;
+
+  document.getElementById("scorecard").innerHTML =
+    `
+    <h2>Official Scorecard</h2>
+
+    ${scorecard}
+
+    <hr>
+
+    <h3>
+      ${fighter1}: ${aliScore}
+      <br>
+      ${fighter2}: ${tysonScore}
+    </h3>
+
+    <h2>${result}</h2>
+    `;
+}#fightLog, #scorecard {
+  background: #111;
+  color: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.round {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
+}let knockdown = Math.random();
+
+if(knockdown > 0.95){
+
+  commentary += `
+  <p>
+  🔥 KNOCKDOWN! A huge punch sends the opponent to the canvas!
+  </p>
+  `;
+
+  if(winner > 0.5){
+    aliScore += 1;
+  }else{
+    tysonScore += 1;
+  }
+}
