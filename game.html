@@ -28,3 +28,106 @@ function punch(){
     }
 }
 </script>let damage = Math.floor(Math.random() * 20) + 5;
+<!DOCTYPE html>
+<html>
+<head>
+<title>2 Player Boxing Game</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    display:flex;
+    justify-content:space-around;
+    margin-top:20px;
+}
+
+.card{
+    background:#1c1c1c;
+    padding:20px;
+    border-radius:12px;
+    width:40%;
+}
+
+button{
+    padding:12px;
+    margin-top:20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:20px;
+    font-size:22px;
+    color:gold;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🥊 2 Player Boxing Match</h1>
+
+<div class="container">
+
+<div class="card">
+<h2>Player 1 🥊</h2>
+<p>HP: <span id="p1hp">100</span></p>
+<button id="p1btn" onclick="p1Attack()">Punch Player 2</button>
+</div>
+
+<div class="card">
+<h2>Player 2 🤖</h2>
+<p>HP: <span id="p2hp">100</span></p>
+<button id="p2btn" onclick="p2Attack()">Punch Player 1</button>
+</div>
+
+</div>
+
+<div id="result"></div>
+
+<script>
+
+let p1 = 100;
+let p2 = 100;
+
+function p1Attack(){
+
+if(p1 <= 0 || p2 <= 0) return;
+
+let dmg = Math.floor(Math.random() * 15) + 5;
+p2 -= dmg;
+
+document.getElementById("p2hp").innerHTML = p2;
+
+if(p2 <= 0){
+    document.getElementById("result").innerHTML = "🏆 Player 1 Wins by KO!";
+}
+}
+
+function p2Attack(){
+
+if(p1 <= 0 || p2 <= 0) return;
+
+let dmg = Math.floor(Math.random() * 15) + 5;
+p1 -= dmg;
+
+document.getElementById("p1hp").innerHTML = p1;
+
+if(p1 <= 0){
+    document.getElementById("result").innerHTML = "🏆 Player 2 Wins by KO!";
+}
+}
+
+</script>
+
+</body>
+    </html>
