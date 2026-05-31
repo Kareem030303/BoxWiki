@@ -1,2 +1,1 @@
-<img src="images/tyson.png">
-<img src="images/ali.png">
+
