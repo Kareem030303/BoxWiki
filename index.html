@@ -648,4 +648,146 @@ document.getElementById("box2").innerHTML=
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Manny_Pacquiao_2016.jpg/600px-Manny_Pacquiao_2016.jpg">
     <h3>Manny Pacquiao</h3>
 </a>    
-    
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fight Simulator</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    padding:20px;
+}
+
+h1{text-align:center;}
+
+select,button{
+    padding:10px;
+    margin:10px;
+    border-radius:8px;
+    border:none;
+}
+
+.container{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
+}
+
+.card{
+    flex:1;
+    background:#1c1c1c;
+    padding:15px;
+    border-radius:12px;
+}
+
+.result{
+    text-align:center;
+    margin-top:20px;
+    font-size:20px;
+    color:gold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🥊 Fight Simulator</h1>
+
+<div style="text-align:center;">
+
+<select id="f1">
+    <option>Mike Tyson</option>
+    <option>Muhammad Ali</option>
+    <option>Floyd Mayweather</option>
+    <option>Canelo Alvarez</option>
+    <option>Deontay Wilder</option>
+</select>
+
+<select id="f2">
+    <option>Muhammad Ali</option>
+    <option>Mike Tyson</option>
+    <option>Floyd Mayweather</option>
+    <option>Canelo Alvarez</option>
+    <option>Deontay Wilder</option>
+</select>
+
+<br>
+
+<button onclick="fight()">Simulate Fight 🥊</button>
+
+</div>
+
+<div class="container">
+
+<div class="card" id="box1">
+<h2>Fighter 1</h2>
+</div>
+
+<div class="card" id="box2">
+<h2>Fighter 2</h2>
+</div>
+
+</div>
+
+<div class="result" id="result"></div>
+
+<script>
+
+const fighters = {
+"Mike Tyson": {power:95,speed:85,defense:70},
+"Muhammad Ali": {power:85,speed:95,defense:90},
+"Floyd Mayweather": {power:80,speed:90,defense:99},
+"Canelo Alvarez": {power:88,speed:85,defense:85},
+"Deontay Wilder": {power:98,speed:80,defense:70}
+};
+
+function score(f){
+    return f.power + f.speed + f.defense;
+}
+
+function fight(){
+
+let aName=document.getElementById("f1").value;
+let bName=document.getElementById("f2").value;
+
+let a=fighters[aName];
+let b=fighters[bName];
+
+document.getElementById("box1").innerHTML=
+`<h2>${aName}</h2>
+<p>Power: ${a.power}</p>
+<p>Speed: ${a.speed}</p>
+<p>Defense: ${a.defense}</p>`;
+
+document.getElementById("box2").innerHTML=
+`<h2>${bName}</h2>
+<p>Power: ${b.power}</p>
+<p>Speed: ${b.speed}</p>
+<p>Defense: ${b.defense}</p>`;
+
+let aScore=score(a);
+let bScore=score(b);
+
+let result="";
+
+if(aScore>bScore){
+    result=`🥊 Winner: ${aName}`;
+}
+else if(bScore>aScore){
+    result=`🥊 Winner: ${bName}`;
+}
+else{
+    result="🤝 It's a draw!";
+}
+
+document.getElementById("result").innerHTML=result;
+
+}
+
+</script>
+
+</body>
+</html>    
