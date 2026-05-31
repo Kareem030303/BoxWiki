@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GOAT Rankings | BoxWiki</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    background:#1c1c1c;
+    margin:10px auto;
+    padding:15px;
+    border-radius:10px;
+    max-width:700px;
+}
+
+.fighter{
+    padding:10px;
+    margin:5px;
+    background:#222;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.fighter:hover{
+    background:gold;
+    color:black;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+#info{
+    margin-top:10px;
+    font-size:18px;
+    color:gold;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>👑 GOAT Rankings (Interactive Top 50)</h1>
+
+<p>Click a fighter to see details 🥊</p>
+
+<div class="card">
+
+<div class="fighter" onclick="showFighter('ali')">1. Muhammad Ali</div>
+<div class="fighter" onclick="showFighter('robinson')">2. Sugar Ray Robinson</div>
+<div class="fighter" onclick="showFighter('louis')">3. Joe Louis</div>
+<div class="fighter" onclick="showFighter('tyson')">4. Mike Tyson</div>
+<div class="fighter" onclick="showFighter('mayweather')">5. Floyd Mayweather Jr.</div>
+
+<div class="fighter" onclick="showFighter('pacquiao')">6. Manny Pacquiao</div>
+<div class="fighter" onclick="showFighter('foreman')">7. George Foreman</div>
+<div class="fighter" onclick="showFighter('leonard')">8. Sugar Ray Leonard</div>
+<div class="fighter" onclick="showFighter('duran')">9. Roberto Durán</div>
+<div class="fighter" onclick="showFighter('chavez')">10. Julio César Chávez</div>
+
+<div class="fighter" onclick="showFighter('hagler')">11. Marvin Hagler</div>
+<div class="fighter" onclick="showFighter('lewis')">12. Lennox Lewis</div>
+<div class="fighter" onclick="showFighter('usyk')">13. Oleksandr Usyk</div>
+<div class="fighter" onclick="showFighter('roy')">14. Roy Jones Jr.</div>
+<div class="fighter" onclick="showFighter('canelo')">15. Canelo Álvarez</div>
+
+<div class="fighter" onclick="showFighter('tank')">48. Gervonta Davis</div>
+<div class="fighter" onclick="showFighter('loma')">49. Vasyl Lomachenko</div>
+<div class="fighter" onclick="showFighter('shakur')">50. Shakur Stevenson</div>
+
+</div>
+
+<div class="card">
+<h2>🥊 Fighter Profile</h2>
+<p id="info">Click a fighter to see details</p>
+</div>
+
+<script>
+
+function showFighter(name){
+
+const data = {
+ali: "Muhammad Ali 🥊 - 56-5, GOAT movement, charisma, heavyweight legend",
+robinson: "Sugar Ray Robinson 🥊 - considered most skilled boxer ever",
+louis: "Joe Louis 🥊 - dominant long-reigning heavyweight champ",
+tyson: "Mike Tyson 🥊 - youngest champ, insane KO power",
+mayweather: "Floyd Mayweather 🥊 - 50-0 defensive genius",
+
+pacquiao: "Manny Pacquiao 🥊 - 8-division world champion",
+foreman: "George Foreman 🥊 - legendary power + comeback champ",
+leonard: "Sugar Ray Leonard 🥊 - speed and IQ",
+duran: "Roberto Durán 🥊 - brutal pressure fighter",
+chavez: "Julio César Chávez 🥊 - insane durability",
+
+hagler: "Marvin Hagler 🥊 - iron middleweight king",
+lewis: "Lennox Lewis 🥊 - technical heavyweight champion",
+usyk: "Oleksandr Usyk 🥊 - elite footwork + skill",
+roy: "Roy Jones Jr. 🥊 - athletic genius",
+canelo: "Canelo Álvarez 🥊 - modern superstar",
+
+tank: "Gervonta Davis 🥊 - explosive KO artist",
+loma: "Vasyl Lomachenko 🥊 - elite angles and movement",
+shakur: "Shakur Stevenson 🥊 - defensive technician"
+};
+
+document.getElementById("info").innerText =
+data[name] || "Fighter not found";
+}
+
+</script>
+
+</body>
+</html>
