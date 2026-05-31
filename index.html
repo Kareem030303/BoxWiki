@@ -1,52 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Boxing Encyclopedia</title>
+    <title>BoxWiki</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #0b0b0b;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #1c1c1c;
+            padding: 10px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: 0.2s;
+            display: block;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background: #2a2a2a;
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            margin: 10px 0 0;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to the Boxing Encyclopedia</h1>
-    <p>Your source for boxers, champions, and boxing history.</p>
-</bod<a class="card" href="muhammad-ali.html">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Muhammad_Ali_NYWTS.jpg">
-    <h3>Muhammad Ali</h3>
-<a class="card" href="mike-tyson.html">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Mike_Tyson_2019.jpg">
-    <h3>Mike Tyson</h3>.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-</a><a class="card" href="floyd-mayweather.html">.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Floyd_Mayweather_Jr.jpg">
-    <h3>Floyd Mayweather</h3>
-</a><a class="card" href="canelo-alvarez.html">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Sa%C3%BAl_%22Canelo%22_%C3%81lvarez_2017.jpg">
-    <h3>Canelo Alvarez</h3>.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-</a><a class="card" href="sugar-ray-robinson.html">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Sugar_Ray_Robinson_1950s.jpg">
-    <h3>Sugar Ray Robinson</h3>.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-</a><a class="card" href="rocky-marciano.html">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Rocky_Marciano_1953.jpg">
-    <h3>Rocky Marciano</h3>.card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-</a>
+
+<h1>Welcome to BoxWiki 🥊</h1>
+<p style="text-align:center;">Your source for boxers, champions, and boxing history.</p>
+
+<div class="grid">
+
+    <a class="card" href="muhammad-ali.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Muhammad_Ali_NYWTS.jpg">
+        <h3>Muhammad Ali</h3>
+    </a>
+
+    <a class="card" href="mike-tyson.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Mike_Tyson_2019.jpg">
+        <h3>Mike Tyson</h3>
+    </a>
+
+    <a class="card" href="floyd-mayweather.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Floyd_Mayweather_Jr.jpg">
+        <h3>Floyd Mayweather</h3>
+    </a>
+
+    <a class="card" href="canelo-alvarez.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Sa%C3%BAl_%22Canelo%22_%C3%81lvarez_2017.jpg">
+        <h3>Canelo Alvarez</h3>
+    </a>
+
+    <a class="card" href="sugar-ray-robinson.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Sugar_Ray_Robinson_1950s.jpg">
+        <h3>Sugar Ray Robinson</h3>
+    </a>
+
+    <a class="card" href="rocky-marciano.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Rocky_Marciano_1953.jpg">
+        <h3>Rocky Marciano</h3>
+    </a>
+
+</div>
+
+</body>
+</html>
