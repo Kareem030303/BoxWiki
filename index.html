@@ -411,4 +411,180 @@ function searchBoxers() {
     border-radius: 10px;
     border: none;
     font-size: 16px;
+<!DOCTYPE html>
+<html>
+<head>
+<title>Heavyweights</title>
+<style>
+body{background:#0b0b0b;color:white;font-family:Arial;padding:20px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;}
+.card{background:#1c1c1c;border-radius:12px;overflow:hidden;text-align:center;text-decoration:none;color:white;}
+.card img{width:100%;height:150px;object-fit:cover;}
+</style>
+</head>
+<body>
+
+<h1>🥊 Heavyweights</h1>
+
+<div class="grid">
+
+<a class="card" href="mike-tyson.html">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Mike_Tyson_1996.jpg/600px-Mike_Tyson_1996.jpg">
+<h3>Mike Tyson</h3>
+</a>
+
+<a class="card" href="anthony-joshua.html">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Anthony_Joshua_2017.jpg/600px-Anthony_Joshua_2017.jpg">
+<h3>Anthony Joshua</h3>
+</a>
+
+<a class="card" href="deontay-wilder.html">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Deontay_Wilder_2018.jpg/600px-Deontay_Wilder_2018.jpg">
+<h3>Deontay Wilder</h3>
+</a>
+
+</div>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+<title>GOAT Rankings</title>
+<style>
+body{background:#0b0b0b;color:white;font-family:Arial;padding:20px;}
+.rank{background:#1c1c1c;margin:10px 0;padding:10px;border-radius:10px;}
+</style>
+</head>
+<body>
+
+<h1>👑 GOAT Rankings</h1>
+
+<div class="rank">1. Muhammad Ali</div>
+<div class="rank">2. Sugar Ray Robinson</div>
+<div class="rank">3. Floyd Mayweather</div>
+<div class="rank">4. Mike Tyson</div>
+<div class="rank">5. Canelo Alvarez</div>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+<title>Boxer Comparison</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    padding:20px;
 }
+
+h1{text-align:center;}
+
+select,button{
+    padding:10px;
+    margin:10px;
+    border-radius:8px;
+    border:none;
+}
+
+.container{
+    display:flex;
+    gap:20px;
+    margin-top:20px;
+}
+
+.card{
+    flex:1;
+    background:#1c1c1c;
+    padding:15px;
+    border-radius:12px;
+}
+
+.stat{
+    margin:8px 0;
+}
+
+.winner{
+    color:gold;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🥊 Fighter Comparison Tool</h1>
+
+<div style="text-align:center;">
+
+<select id="fighter1">
+    <option>Mike Tyson</option>
+    <option>Muhammad Ali</option>
+    <option>Floyd Mayweather</option>
+    <option>Canelo Alvarez</option>
+    <option>Deontay Wilder</option>
+</select>
+
+<select id="fighter2">
+    <option>Muhammad Ali</option>
+    <option>Mike Tyson</option>
+    <option>Floyd Mayweather</option>
+    <option>Canelo Alvarez</option>
+    <option>Deontay Wilder</option>
+</select>
+
+<button onclick="compare()">Compare</button>
+
+</div>
+
+<div class="container">
+
+<div class="card" id="box1">
+<h2>Fighter 1</h2>
+</div>
+
+<div class="card" id="box2">
+<h2>Fighter 2</h2>
+</div>
+
+</div>
+
+<script>
+
+const data = {
+"Mike Tyson": {record:"50-6", ko:44, height:70, weight:"Heavyweight"},
+"Muhammad Ali": {record:"56-5", ko:37, height:75, weight:"Heavyweight"},
+"Floyd Mayweather": {record:"50-0", ko:27, height:69, weight:"Welterweight"},
+"Canelo Alvarez": {record:"60-2-2", ko:39, height:71, weight:"Super Middleweight"},
+"Deontay Wilder": {record:"43-4-1", ko:42, height:83, weight:"Heavyweight"}
+};
+
+function compare(){
+
+let f1=document.getElementById("fighter1").value;
+let f2=document.getElementById("fighter2").value;
+
+let a=data[f1];
+let b=data[f2];
+
+document.getElementById("box1").innerHTML=
+`<h2>${f1}</h2>
+<div class="stat">Record: ${a.record}</div>
+<div class="stat">KOs: ${a.ko}</div>
+<div class="stat">Height (in): ${a.height}</div>
+<div class="stat">Weight: ${a.weight}</div>`;
+
+document.getElementById("box2").innerHTML=
+`<h2>${f2}</h2>
+<div class="stat">Record: ${b.record}</div>
+<div class="stat">KOs: ${b.ko}</div>
+<div class="stat">Height (in): ${b.height}</div>
+<div class="stat">Weight: ${b.weight}</div>`;
+
+}
+
+</script>
+
+</body>
+</html>
