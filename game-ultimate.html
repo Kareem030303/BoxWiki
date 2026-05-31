@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Boxing Career Ultimate</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    background:#1c1c1c;
+    padding:15px;
+    margin:10px;
+    border-radius:12px;
+}
+
+.hidden{display:none;}
+
+button{
+    padding:12px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.bar{
+    background:#333;
+    height:12px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:gold;
+    width:100%;
+}
+
+#result{
+    color:gold;
+    font-size:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🥊 Boxing Career Ultimate</h1>
+
+<!-- FIGHTER SELECT -->
+<div id="selectScreen" class="card">
+
+<h2>Select Your Fighter</h2>
+
+<div onclick="pickPlayer('Tyson')" class="card">Mike Tyson</div>
+<div onclick="pickPlayer('Ali')" class="card">Muhammad Ali</div>
+<div onclick="pickPlayer('Canelo')" class="card">Canelo Alvarez</div>
+
+<button onclick="startGame()">Start Career 🏆</button>
+
+</div>
+
+<!-- GAME SCREEN -->
+<div id="gameScreen" class="hidden">
+
+<h2 id="rank">Rank: Rookie</h2>
+<h3 id="opponent">Opponent</h3>
+
+<p>Opponent HP: <span id="hp">100</span></p>
+
+<div class="bar"><div class="fill" id="bar"></div></div>
+
+<button onclick="attack()">Punch 👊</button>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+let player = "Tyson";
+
+let fighters = {
+Tyson: 18,
+Ali: 12,
+Canelo: 15
+};
+
+let ranks = [
+"Rookie",
+"Amateur",
+"Local Champion",
+"National Contender",
+"World Ranked Fighter",
+"Champion"
+];
+
+let rankIndex = 0;
+let hp = 100;
+
+function pickPlayer(name){
+player = name;
+alert("Selected: " + name);
+}
+
+function startGame(){
+document.getElementById("selectScreen").classList.add("hidden");
+document.getElementById("gameScreen").classList.remove("hidden");
+loadFight();
+}
+
+function loadFight(){
+
+hp = 100;
+
+document.getElementById("hp").innerText = hp;
+document.getElementById("bar").style.width = "100%";
+
+document.getElementById("rank").innerText = "Rank: " + ranks[rankIndex];
+
+document.getElementById("opponent").innerText =
+"Opponent: " + ranks[rankIndex];
+
+document.getElementById("result").innerText = "";
+}
+
+function attack(){
+
+let damage = fighters[player] + Math.floor(Math.random() * 10);
+
+hp -= damage;
+
+document.getElementById("hp").innerText = hp;
+document.getElementById("bar").style.width = hp + "%";
+
+if(hp <= 0){
+
+rankIndex++;
+
+document.getElementById("result").innerText =
+"🏆 You won! You advanced in your career!";
+
+if(rankIndex >= ranks.length){
+document.getElementById("result").innerText =
+"👑 YOU ARE THE CHAMPION!";
+return;
+}
+
+setTimeout(loadFight, 1500);
+}
+}
+
+</script>
+
+</body>
+</html>
