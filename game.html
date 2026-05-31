@@ -198,3 +198,144 @@ update();
 
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Boxing Career Mode</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    background:#1c1c1c;
+    padding:15px;
+    margin:10px;
+    border-radius:12px;
+}
+
+button{
+    padding:12px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#fightScreen{
+    display:none;
+}
+
+.bar{
+    background:#333;
+    height:12px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:gold;
+    width:100%;
+}
+
+#result{
+    color:gold;
+    font-size:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🥊 Boxing Career Mode</h1>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="card">
+
+<h2>Your Career Starts Here</h2>
+
+<p>You are a rookie boxer starting your journey.</p>
+
+<button onclick="startCareer()">Start Career 🥊</button>
+
+</div>
+
+<!-- FIGHT SCREEN -->
+<div id="fightScreen">
+
+<h2 id="opponent">Opponent</h2>
+
+<p>Round Fighter</p>
+
+<p>Opponent HP: <span id="hp">100</span></p>
+
+<div class="bar"><div class="fill" id="bar"></div></div>
+
+<button onclick="punch()">Fight 👊</button>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+let hp = 100;
+let wins = 0;
+let rank = 1;
+
+let opponents = [
+"Local Gym Fighter",
+"Amateur Champion",
+"Rising Prospect",
+"National Contender",
+"World Ranked Boxer"
+];
+
+function startCareer(){
+document.getElementById("startScreen").style.display = "none";
+document.getElementById("fightScreen").style.display = "block";
+loadFight();
+}
+
+function loadFight(){
+
+hp = 100;
+
+let opponent = opponents[Math.floor(Math.random() * opponents.length)];
+
+document.getElementById("opponent").innerText = opponent;
+document.getElementById("hp").innerText = hp;
+document.getElementById("bar").style.width = "100%";
+document.getElementById("result").innerText = "";
+}
+
+function punch(){
+
+let damage = Math.floor(Math.random() * 15) + 5;
+hp -= damage;
+
+document.getElementById("hp").innerText = hp;
+document.getElementById("bar").style.width = hp + "%";
+
+if(hp <= 0){
+    wins++;
+    rank++;
+
+    document.getElementById("result").innerHTML =
+    "🏆 You won! Wins: " + wins + " | Rank: " + rank;
+
+    setTimeout(loadFight, 1500);
+}
+}
+
+</script>
+
+</body>
+</html>
