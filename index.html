@@ -917,5 +917,139 @@ if(knockdown > 0.95){
     aliScore += 1;
   }else{
     tysonScore += 1;
-  }
+  <section class="hero">
+
+<h1>🥊 BoxWiki</h1>
+
+<p>
+The Ultimate Boxing Database, Simulator,
+and History Archive.
+</p>
+
+<button>Explore Fighters</button>
+
+<button>Simulate Fight</button>
+
+</section>
+
+<style>
+
+.hero{
+text-align:center;
+padding:60px 20px;
+background:linear-gradient(135deg,#000,#222);
+color:white;
+border-radius:15px;
 }
+
+.hero h1{
+font-size:60px;
+margin-bottom:10px;
+}
+
+.hero button{
+padding:12px 20px;
+margin:5px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+</style>
+<section class="hero">
+
+<h1>🥊 BoxWiki</h1>
+
+<div id="spotlight"></div>
+
+<script>
+
+const legends = [
+
+{
+name:"Harry Greb",
+record:"299-28-6",
+info:"One of the greatest middleweights ever."
+},
+
+{
+name:"Sam Langford",
+record:"178-30-38",
+info:"Feared heavyweight despite small size."
+},
+
+{
+name:"Ezzard Charles",
+record:"95-25-1",
+info:"Former heavyweight champion."
+}
+
+];
+
+let boxer =
+legends[Math.floor(Math.random()*legends.length)];
+
+document.getElementById("spotlight").innerHTML = `
+<div class="spotlight-card">
+
+<h2>⭐ Forgotten Legend</h2>
+
+<h3>${boxer.name}</h3>
+
+<p>${boxer.record}</p>
+
+<p>${boxer.info}</p>
+
+</div>
+`;
+
+</script>
+
+<style>
+.spotlight-card{
+background:#1a1a1a;
+color:white;
+padding:20px;
+border-radius:12px;
+}
+</style><section class="hero">
+
+<h1>🥊 BoxWiki</h1>
+
+<p>
+The Ultimate Boxing Database, Simulator,
+and History Archive.
+</p>
+
+<button>Explore Fighters</button>
+
+<button>Simulate Fight</button>
+
+</section>
+
+<style>
+
+.hero{
+text-align:center;
+padding:60px 20px;
+background:linear-gradient(135deg,#000,#222);
+color:white;
+border-radius:15px;
+}
+
+.hero h1{
+font-size:60px;
+margin-bottom:10px;
+}
+
+.hero button{
+padding:12px 20px;
+margin:5px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+</style>
