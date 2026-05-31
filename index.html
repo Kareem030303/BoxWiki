@@ -16,20 +16,24 @@
             text-align: center;
         }
 
+        p {
+            text-align: center;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .card {
             background: #1c1c1c;
-            padding: 10px;
             border-radius: 12px;
             text-align: center;
             text-decoration: none;
             color: white;
+            overflow: hidden;
             transition: 0.2s;
             display: block;
         }
@@ -41,51 +45,50 @@
 
         .card img {
             width: 100%;
-            height: 150px;
+            height: 160px;
             object-fit: cover;
-            border-radius: 10px;
         }
 
         .card h3 {
-            margin: 10px 0 0;
+            margin: 10px;
         }
     </style>
 </head>
 
 <body>
 
-<h1>Welcome to BoxWiki 🥊</h1>
-<p style="text-align:center;">Your source for boxers, champions, and boxing history.</p>
+<h1>BoxWiki 🥊</h1>
+<p>Your boxing encyclopedia of legends</p>
 
 <div class="grid">
 
     <a class="card" href="muhammad-ali.html">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Muhammad_Ali_NYWTS.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Muhammad_Ali%2C_1967.jpg">
         <h3>Muhammad Ali</h3>
     </a>
 
     <a class="card" href="mike-tyson.html">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Mike_Tyson_2019.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Mike_Tyson_1996.jpg">
         <h3>Mike Tyson</h3>
     </a>
 
     <a class="card" href="floyd-mayweather.html">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Floyd_Mayweather_Jr.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Floyd_Mayweather_Jr_2015.jpg">
         <h3>Floyd Mayweather</h3>
     </a>
 
     <a class="card" href="canelo-alvarez.html">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Sa%C3%BAl_%22Canelo%22_%C3%81lvarez_2017.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Sa%C3%BAl_%22Canelo%22_%C3%81lvarez.jpg">
         <h3>Canelo Alvarez</h3>
     </a>
 
     <a class="card" href="sugar-ray-robinson.html">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Sugar_Ray_Robinson_1950s.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Sugar_Ray_Robinson_1951.jpg">
         <h3>Sugar Ray Robinson</h3>
     </a>
 
     <a class="card" href="rocky-marciano.html">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Rocky_Marciano_1953.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Rocky_Marciano_1952.jpg">
         <h3>Rocky Marciano</h3>
     </a>
 
