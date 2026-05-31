@@ -17,7 +17,7 @@ body{
 .card{
     background:#1c1c1c;
     padding:15px;
-    border-radius:12px;
+    border-radius:12px;7y
     margin:10px;
     cursor:pointer;
     display:inline-block;
@@ -119,183 +119,19 @@ let fighters = {
 
 let player = "Tyson";
 let ai = "Ali";
-
-let pHp = 100;
-let eHp = 100;
-
-let round = 1;
-let maxRounds = 5;
-
-function selectPlayer(name){
-player = name;
-alert("Player selected: " + name);
-}
-
-function selectAI(name){
-ai = name;
-alert("AI selected: " + name);
-}
-
-function startGame(){
-
-document.getElementById("selectScreen").classList.add("hidden");
-document.getElementById("gameScreen").classList.remove("hidden");
-
-document.getElementById("playerName").innerText = player;
-document.getElementById("aiName").innerText = ai;
-
-pHp = fighters[player].hp;
-eHp = fighters[ai].hp;
-
-update();
-}
-
-function update(){
-
-document.getElementById("pHp").innerText = pHp;
-document.getElementById("eHp").innerText = eHp;
-
-document.getElementById("pBar").style.width = pHp + "%";
-document.getElementById("eBar").style.width = eHp + "%";
-
-document.getElementById("round").innerText = "Round " + round + " / " + maxRounds;
-}
-
-function attack(){
-
-let dmg = fighters[player].power + Math.floor(Math.random() * 10);
-eHp -= dmg;
-
-update();
-
-if(eHp <= 0){
-    endGame(player + " Wins by KO 🏆");
-    return;
-}
-
-setTimeout(aiAttack, 800);
-}
-
-function aiAttack(){
-
-let dmg = fighters[ai].power + Math.floor(Math.random() * 8);
-pHp -= dmg;
-
-update();
-
-if(pHp <= 0){
-    endGame(ai + " Wins by KO 🤖");
-}
-}
-
-function endGame(text){
-document.getElementById("result").innerText = text;
-}
-
-update();
-
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Boxing Career Mode</title>
-
-<style>
-body{
-    background:#0b0b0b;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    padding:20px;
-}
-
-.card{
-    background:#1c1c1c;
-    padding:15px;
-    margin:10px;
-    border-radius:12px;
-}
-
-button{
-    padding:12px;
-    margin:10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-#fightScreen{
-    display:none;
-}
-
-.bar{
-    background:#333;
-    height:12px;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.fill{
-    height:100%;
-    background:gold;
-    width:100%;
-}
-
-#result{
-    color:gold;
-    font-size:20px;
-}
-</style>
-
-</head>
-
-<body>
-
-<h1>🥊 Boxing Career Mode</h1>
-
-<!-- START SCREEN -->
-<div id="startScreen" class="card">
-
-<h2>Your Career Starts Here</h2>
-
-<p>You are a rookie boxer starting your journey.</p>
-
-<button onclick="startCareer()">Start Career 🥊</button>
-
-</div>
-
-<!-- FIGHT SCREEN -->
-<div id="fightScreen">
-
-<h2 id="opponent">Opponent</h2>
-
-<p>Round Fighter</p>
-
-<p>Opponent HP: <span id="hp">100</span></p>
-
-<div class="bar"><div class="fill" id="bar"></div></div>
-
-<button onclick="punch()">Fight 👊</button>
-
-<p id="result"></p>
-
-</div>
-
 <script>
 
 let hp = 100;
 let wins = 0;
-let rank = 1;
+let rankIndex = 0;
 
-let opponents = [
+let ranks = [
 "Local Gym Fighter",
-"Amateur Champion",
-"Rising Prospect",
-"National Contender",
-"World Ranked Boxer"
+"Amateur Boxer",
+"Regional Contender",
+"National Competitor",
+"Top Prospect",
+"World Ranked Fighter"
 ];
 
 function startCareer(){
@@ -308,15 +144,21 @@ function loadFight(){
 
 hp = 100;
 
-let opponent = opponents[Math.floor(Math.random() * opponents.length)];
+document.getElementById("opponent").innerText = ranks[rankIndex];
 
-document.getElementById("opponent").innerText = opponent;
 document.getElementById("hp").innerText = hp;
 document.getElementById("bar").style.width = "100%";
+
 document.getElementById("result").innerText = "";
 }
 
 function punch(){
+
+if(rankIndex >= ranks.length - 1){
+document.getElementById("result").innerHTML =
+"🏆 You are already at the top level!";
+return;
+}
 
 let damage = Math.floor(Math.random() * 15) + 5;
 hp -= damage;
@@ -325,17 +167,17 @@ document.getElementById("hp").innerText = hp;
 document.getElementById("bar").style.width = hp + "%";
 
 if(hp <= 0){
-    wins++;
-    rank++;
 
-    document.getElementById("result").innerHTML =
-    "🏆 You won! Wins: " + wins + " | Rank: " + rank;
+wins++;
+rankIndex++;
 
-    setTimeout(loadFight, 1500);
+document.getElementById("result").innerHTML =
+"🏆 You defeated " + ranks[rankIndex - 1] +
+" | Wins: " + wins;
+
+setTimeout(loadFight, 1500);
 }
 }
 
 </script>
 
-</body>
-</html>
