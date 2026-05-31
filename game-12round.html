@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>12 Round Boxing Match</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    background:#1c1c1c;
+    padding:15px;
+    margin:10px;
+    border-radius:12px;
+}
+
+button{
+    padding:12px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.bar{
+    background:#333;
+    height:12px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:gold;
+    width:100%;
+}
+
+#result{
+    color:gold;
+    font-size:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🥊 12 Round Boxing Match</h1>
+
+<h2 id="round">Round 1 / 12</h2>
+
+<div class="card">
+
+<h3>You 🥊</h3>
+<p>HP: <span id="pHp">100</span></p>
+<div class="bar"><div class="fill" id="pBar"></div></div>
+
+<button onclick="punch()">Punch 👊</button>
+
+</div>
+
+<div class="card">
+
+<h3>Opponent 🤖</h3>
+<p>HP: <span id="eHp">100</span></p>
+<div class="bar"><div class="fill" id="eBar"></div></div>
+
+</div>
+
+<p id="result"></p>
+
+<script>
+
+let pHp = 100;
+let eHp = 100;
+
+let round = 1;
+let maxRounds = 12;
+
+let pScore = 0;
+let eScore = 0;
+
+function update(){
+
+document.getElementById("pHp").innerText = pHp;
+document.getElementById("eHp").innerText = eHp;
+
+document.getElementById("pBar").style.width = pHp + "%";
+document.getElementById("eBar").style.width = eHp + "%";
+
+document.getElementById("round").innerText =
+"Round " + round + " / " + maxRounds;
+}
+
+function punch(){
+
+if(pHp <= 0 || eHp <= 0) return;
+
+let dmg = Math.floor(Math.random() * 15) + 5;
+eHp -= dmg;
+
+if(dmg > 10) pScore++;
+
+update();
+
+if(eHp <= 0){
+endFight("You Win by KO 🏆");
+return;
+}
+
+setTimeout(aiPunch, 700);
+}
+
+function aiPunch(){
+
+if(pHp <= 0 || eHp <= 0) return;
+
+let dmg = Math.floor(Math.random() * 12) + 4;
+pHp -= dmg;
+
+if(dmg > 8) eScore++;
+
+update();
+
+if(pHp <= 0){
+endFight("You Lose by KO 🤖");
+return;
+}
+
+nextRound();
+}
+
+function nextRound(){
+
+round++;
+
+if(round > maxRounds){
+judgeDecision();
+return;
+}
+
+document.getElementById("result").innerText =
+"End of Round " + (round - 1);
+
+setTimeout(update, 800);
+}
+
+function judgeDecision(){
+
+if(pScore > eScore){
+endFight("You win by Decision 🏆");
+}
+else if(eScore > pScore){
+endFight("You lose by Decision 🤖");
+}
+else{
+endFight("Draw 🤝");
+}
+}
+
+function endFight(text){
+
+document.getElementById("result").innerText = text;
+
+pHp = 0;
+eHp = 0;
+
+update();
+}
+
+update();
+
+</script>
+
+</body>
+                           </html>
