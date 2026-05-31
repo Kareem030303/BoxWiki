@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Guess the Fighter | BoxWiki</title>
+
+<style>
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    background:#1c1c1c;
+    max-width:600px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:10px;
+}
+
+button{
+    padding:10px 15px;
+    margin:8px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:gold;
+    color:black;
+}
+
+#result{
+    color:gold;
+    font-size:20px;
+    margin-top:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🥊 Guess the Fighter</h1>
+
+<div class="card">
+
+<h2 id="clue">Click Start to Begin</h2>
+
+<button onclick="startGame()">Start Game</button>
+
+<div id="choices" style="display:none;">
+<button onclick="guess('ali')">Muhammad Ali</button>
+<button onclick="guess('tyson')">Mike Tyson</button>
+<button onclick="guess('mayweather')">Floyd Mayweather</button>
+<button onclick="guess('pacquiao')">Manny Pacquiao</button>
+</div>
+
+<p id="result"></p>
+
+</div>
+
+<script>
+
+let correct = "";
+
+function startGame(){
+
+let fighters = ["ali","tyson","mayweather","pacquiao"];
+let random = fighters[Math.floor(Math.random()*fighters.length)];
+correct = random;
+
+document.getElementById("choices").style.display = "block";
+
+if(random === "ali"){
+document.getElementById("clue").innerText =
+"Clue: Known for 'Float like a butterfly, sting like a bee' 🐝";
+}
+
+if(random === "tyson"){
+document.getElementById("clue").innerText =
+"Clue: Youngest heavyweight champion ever 🥊";
+}
+
+if(random === "mayweather"){
+document.getElementById("clue").innerText =
+"Clue: 50-0 record, defensive genius 🧠";
+}
+
+if(random === "pacquiao"){
+document.getElementById("clue").innerText =
+"Clue: Only 8-division world champion 🌍";
+}
+
+document.getElementById("result").innerText = "";
+
+}
+
+function guess(name){
+
+if(name === correct){
+document.getElementById("result").innerText = "✅ Correct! You got it!";
+}else{
+document.getElementById("result").innerText = "❌ Wrong! Try again!";
+}
+
+}
+
+</script>
+
+</body>
+  </html>
