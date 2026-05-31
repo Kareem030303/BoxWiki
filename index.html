@@ -1261,3 +1261,28 @@ a:hover{
 <a href="games.html">
 🎮 BoxWiki Arcade
 </a>
+body{
+    background: radial-gradient(circle at top, #2a2a2a, #000);
+    color:white;
+    font-family:Arial;
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* subtle golden haze */
+body::before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.08), transparent 60%);
+    animation: glow 6s infinite alternate;
+    pointer-events:none;
+}
+
+@keyframes glow{
+    from{transform:translate(0,0);}
+    to{transform:translate(50px,30px);}
+}
