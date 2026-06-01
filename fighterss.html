@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BoxWiki Live Fighters 🥊</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #0b0f19;
+      color: white;
+      padding: 20px;
+    }
+
+    .card {
+      background: #111827;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .log {
+      margin-top: 15px;
+      background: #0f172a;
+      padding: 10px;
+      border-radius: 8px;
+      min-height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🥊 BoxWiki Live Fighter Engine</h1>
+
+<div class="card">
+
+  <h2>Ryan Garcia</h2>
+  <p>Record: <span id="record">25-2 (20)</span></p>
+  <p>Status: WBC World Champion 👑</p>
+
+  <button onclick="nextFight()">Simulate Latest Fight Event ⚡</button>
+
+  <div class="log" id="log"></div>
+
+</div>
+
+<script>
