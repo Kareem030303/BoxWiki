@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BoxWiki Rivalries 🥊</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0b0f19;
+  color: white;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.rivalry {
+  background: #111827;
+  padding: 15px;
+  margin: 15px auto;
+  border-radius: 10px;
+  max-width: 700px;
+  border: 1px solid #2d3748;
+}
+
+button {
+  padding: 8px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.details {
+  display: none;
+  margin-top: 10px;
+  background: #0f172a;
+  padding: 10px;
+  border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🥊 BoxWiki Rivalries Hub</h1>
+
+<!-- ===================== -->
+<!-- GARCIA VS HANEY -->
+<!-- ===================== -->
+<div class="rivalry">
+  <h2>Ryan Garcia vs Devin Haney</h2>
+  <p>Status: Active / Controversial Era</p>
+
+  <button onclick="toggle('gh')">View Rivalry</button>
+
+  <div class="details" id="gh">
+    <h3>Record</h3>
+    <p>Garcia Wins: 1 (later overturned to No Contest in official records)</p>
+    <p>Haney Wins: 0</p>
+
+    <h3>Breakdown</h3>
+    <p>
+      Speed vs structure. Garcia brings explosive timing bursts,
+      Haney brings defensive control and jab rhythm.
+    </p>
+
+    <h3>Key Fight</h3>
+    <p>
+      2024 bout: Garcia scored multiple knockdowns and initially won by decision.
+      Later changed due to regulatory issues → No Contest.
+    </p>
+  </div>
+</div>
+
+<!-- ===================== -->
+<!-- PACQUIAO VS MARQUEZ -->
+<!-- ===================== -->
+<div class="rivalry">
+  <h2>Manny Pacquiao vs Juan Manuel Márquez</h2>
+  <p>Status: Completed 4-Fight Saga</p>
+
+  <button onclick="toggle('mp')">View Rivalry</button>
+
+  <div class="details" id="mp">
+    <h3>Record</h3>
+    <p>Pacquiao: 2 Wins</p>
+    <p>Márquez: 1 Win</p>
+    <p>Draws: 1</p>
+
+    <h3>Fight History</h3>
+    <ul>
+      <li>2004 – Draw (3 Pacquiao knockdowns)</li>
+      <li>2008 – Pacquiao win (split decision)</li>
+      <li>2011 – Pacquiao win (majority decision)</li>
+      <li>2012 – Márquez KO win (Round 6)</li>
+    </ul>
+
+    <h3>Legacy</h3>
+    <p>
+      One of boxing’s greatest rivalries defined by tactical evolution,
+      controversy, and one iconic knockout finish.
+    </p>
+  </div>
+</div>
+
+<script>
+function toggle(id) {
+  let el = document.getElementById(id);
+  if (el.style.display === "block") {
+    el.style.display = "none";
+  } else {
+    el.style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>
