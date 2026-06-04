@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BoxWiki Fight Simulator 🥊</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0b0f19;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.card {
+  background: #111827;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: auto;
+}
+
+select, button {
+  padding: 10px;
+  margin: 10px;
+}
+
+.log {
+  margin-top: 15px;
+  background: #0f172a;
+  padding: 10px;
+  border-radius: 8px;
+  min-height: 200px;
+  text-align: left;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🥊 BoxWiki Fight Simulator</h1>
+
+<div class="card">
+
+  <h3>Select Fighters</h3>
+
+  <select id="f1">
+    <option>Ryan Garcia</option>
+    <option>Devin Haney</option>
+    <option>Manny Pacquiao</option>
+    <option>Juan Manuel Márquez</option>
+  </select>
+
+  <select id="f2">
+    <option>Devin Haney</option>
+    <option>Ryan Garcia</option>
+    <option>Juan Manuel Márquez</option>
+    <option>Manny Pacquiao</option>
+  </select>
+
+  <br>
+
+  <button onclick="simulateFight()">Simulate Fight 🥊</button>
+
+  <div class="log" id="log"></div>
+
+</div>
+
+<script>
+
+// 🧠 simple fighter stats engine
+function getStats(name) {
+  let fighters = {
+    "Ryan Garcia": { power: 9, speed: 9, iq: 8 },
+    "Devin Haney": { power: 7, speed: 8, iq: 9 },
+    "Manny Pacquiao": { power: 9, speed: 10, iq: 8 },
+    "Juan Manuel Márquez": { power: 8, speed: 8, iq: 10 }
+  };
+
+  return fighters[name];
+}
+
+// 🥊 SIMULATE FIGHT
+function simulateFight() {
+
+  let a = document.getElementById("f1").value;
+  let b = document.getElementById("f2").value;
+
+  let A = getStats(a);
+  let B = getStats(b);
+
+  let log = "";
+
+  let scoreA = 0;
+  let scoreB = 0;
+
+  log += `<b>Fight Start:</b> ${a} vs ${b}<br><br>`;
+
+  for (let round = 1; round <= 12; round++) {
+
+    let rA = Math.random() * (A.power + A.speed + A.iq);
+    let rB = Math.random() * (B.power + B.speed + B.iq);
+
+    if (rA > rB) {
+      scoreA++;
+      log += `Round ${round}: ${a} controls action 🟢<br>`;
+    } else if (rB > rA) {
+      scoreB++;
+      log += `Round ${round}: ${b} takes the round 🔵<br>`;
+    } else {
+      log += `Round ${round}: Even exchange ⚖️<br>`;
+    }
+  }
+
+  log += "<br><b>Final Score:</b><br>";
+  log += `${a}: ${scoreA}<br>`;
+  log += `${b}: ${scoreB}<br><br>`;
+
+  if (scoreA > scoreB) {
+    log += `🏆 Winner: ${a}`;
+  } else if (scoreB > scoreA) {
+    log += `🏆 Winner: ${b}`;
+  } else {
+    log += `🤝 Result: Draw`;
+  }
+
+  document.getElementById("log").innerHTML = log;
+}
+
+</script>
+
+</body>
+</html>
