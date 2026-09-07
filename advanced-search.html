@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoxWiki - Advanced Search</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #111;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .search-container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .filters {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 20px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .search-btn {
+      background: #111;
+      color: white;
+    }
+
+    .clear-btn {
+      background: #ddd;
+    }
+
+    .results {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .boxer-card {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .boxer-card h2 {
+      margin-top: 0;
+    }
+
+    .record {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .no-results {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🥊 BoxWiki</h1>
+  <p>Advanced Boxer Search</p>
+</header>
+
+<div class="search-container">
+
+  <div class="filters">
+
+    <div>
+      <label for="name">Boxer Name</label>
+      <input id="name" type="text" placeholder="e.g. Canelo">
+    </div>
+
+    <div>
+      <label for="weight">Weight Class</label>
+      <select id="weight">
+        <option value="">Any Weight Class</option>
+        <option value="Heavyweight">Heavyweight</option>
+        <option value="Cruiserweight">Cruiserweight</option>
+        <option value="Light Heavyweight">Light Heavyweight</option>
+        <option value="Super Middleweight">Super Middleweight</option>
+        <option value="Middleweight">Middleweight</option>
+        <option value="Super Welterweight">Super Welterweight</option>
+        <option value="Welterweight">Welterweight</option>
+        <option value="Super Lightweight">Super Lightweight</option>
+        <option value="Lightweight">Lightweight</option>
+        <option value="Super Featherweight">Super Featherweight</option>
+        <option value="Featherweight">Featherweight</option>
+        <option value="Super Bantamweight">Super Bantamweight</option>
+        <option value="Bantamweight">Bantamweight</option>
+        <option value="Super Flyweight">Super Flyweight</option>
+        <option value="Flyweight">Flyweight</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="status">Status</label>
+      <select id="status">
+        <option value="">Any Status</option>
+        <option value="Active">Active</option>
+        <option value="Retired">Retired</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="minWins">Minimum Wins</label>
+      <input id="minWins" type="number" min="0" placeholder="0">
+    </div>
+
+    <div>
+      <label for="minKO">Minimum KO Wins</label>
+      <input id="minKO" type="number" min="0" placeholder="0">
+    </div>
+
+    <div>
+      <label for="country">Country</label>
+      <input id="country" type="text" placeholder="e.g. Mexico">
+    </div>
+
+    <div style="display:flex; gap:10px; align-items:end;">
+      <button class="search-btn" onclick="searchBoxers()">Search</button>
+      <button class="clear-btn" onclick="clearSearch()">Clear</button>
+    </div>
+
+  </div>
+
+  <div id="results" class="results"></div>
+
+</div>
+
+<script>
+
+const boxers = [
+
+  {
+    name: "Canelo Alvarez",
+    weight: "Super Middleweight",
+    wins: 63,
+    losses: 2,
+    draws: 2,
+    kos: 39,
+    country: "Mexico",
+    status: "Active"
+  },
+
+  {
+    name: "Tyson Fury",
+    weight: "Heavyweight",
+    wins: 34,
+    losses: 2,
+    draws: 1,
+    kos: 24,
+    country: "United Kingdom",
+    status: "Retired"
+  },
+
+  {
+    name: "Terence Crawford",
+    weight: "Welterweight",
+    wins: 42,
+    losses: 0,
+    draws: 0,
+    kos: 31,
+    country: "United States",
+    status: "Active"
+  },
+
+  {
+    name: "Naoya Inoue",
+    weight: "Bantamweight",
+    wins: 31,
+    losses: 0,
+    draws: 0,
+    kos: 27,
+    country: "Japan",
+    status: "Active"
+  },
+
+  {
+    name: "Gervonta Davis",
+    weight: "Lightweight",
+    wins: 30,
+    losses: 0,
+    draws: 0,
+    kos: 28,
+    country: "United States",
+    status: "Active"
+  }
+
+];
+
+
+function displayBoxers(list) {
+
+  const results = document.getElementById("results");
+
+  results.innerHTML = "";
+
+  if (list.length === 0) {
+
+    results.innerHTML = `
+      <div class="no-results">
+        ❌ No boxers found.
+      </div>
+    `;
+
+    return;
+  }
+
+  list.forEach(boxer => {
+
+    results.innerHTML += `
+
+      <div class="boxer-card">
+
+        <h2>${boxer.name}</h2>
+
+        <p class="record">
+          ${boxer.wins}-${boxer.losses}-${boxer.draws}
+        </p>
+
+        <p>🥊 KO Wins: ${boxer.kos}</p>
+
+        <p>⚖️ ${boxer.weight}</p>
+
+        <p>🌎 ${boxer.country}</p>
+
+        <p>📌 ${boxer.status}</p>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+function searchBoxers() {
+
+  const name =
+    document.getElementById("name").value.toLowerCase();
+
+  const weight =
+    document.getElementById("weight").value;
+
+  const status =
+    document.getElementById("status").value;
+
+  const minWins =
+    Number(document.getElementById("minWins").value) || 0;
+
+  const minKO =
+    Number(document.getElementById("minKO").value) || 0;
+
+  const country =
+    document.getElementById("country").value.toLowerCase();
+
+
+  const filtered = boxers.filter(boxer => {
+
+    return (
+
+      boxer.name.toLowerCase().includes(name) &&
+
+      (weight === "" || boxer.weight === weight) &&
+
+      (status === "" || boxer.status === status) &&
+
+      boxer.wins >= minWins &&
+
+      boxer.kos >= minKO &&
+
+      boxer.country.toLowerCase().includes(country)
+
+    );
+
+  });
+
+
+  displayBoxers(filtered);
+
+}
+
+
+function clearSearch() {
+
+  document.getElementById("name").value = "";
+
+  document.getElementById("weight").value = "";
+
+  document.getElementById("status").value = "";
+
+  document.getElementById("minWins").value = "";
+
+  document.getElementById("minKO").value = "";
+
+  document.getElementById("country").value = "";
+
+  displayBoxers(boxers);
+
+}
+
+
+// Show all boxers when page loads
+displayBoxers(boxers);
+
+</script>
+
+</body>
+</html>
