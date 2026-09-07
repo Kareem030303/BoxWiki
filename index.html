@@ -2153,3 +2153,531 @@ displayBoxers(boxers);
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BoxWiki - Build Your Own Champion</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  color: #111;
+}
+
+header {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+header p {
+  margin-bottom: 0;
+  color: #ccc;
+}
+
+.container {
+  max-width: 850px;
+  margin: 30px auto;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 6px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.stat {
+  margin-top: 18px;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+input[type="range"] {
+  padding: 0;
+}
+
+button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #111;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+#result {
+  display: none;
+}
+
+.profile {
+  text-align: center;
+}
+
+.rating {
+  font-size: 55px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.rating-label {
+  color: #777;
+}
+
+.record {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.badge {
+  display: inline-block;
+  background: #111;
+  color: white;
+  padding: 7px 12px;
+  border-radius: 20px;
+  margin-top: 8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🥊 BoxWiki</h1>
+  <p>Build Your Own Champion</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Create Your Boxer</h2>
+
+    <label>Boxer Name</label>
+    <input id="boxerName" type="text" placeholder="Enter boxer name">
+
+    <label>Country</label>
+    <input id="country" type="text" placeholder="e.g. United States">
+
+    <label>Weight Class</label>
+
+    <select id="weight">
+      <option>Heavyweight</option>
+      <option>Cruiserweight</option>
+      <option>Light Heavyweight</option>
+      <option>Super Middleweight</option>
+      <option>Middleweight</option>
+      <option>Super Welterweight</option>
+      <option>Welterweight</option>
+      <option>Super Lightweight</option>
+      <option>Lightweight</option>
+      <option>Super Featherweight</option>
+      <option>Featherweight</option>
+      <option>Super Bantamweight</option>
+      <option>Bantamweight</option>
+      <option>Super Flyweight</option>
+      <option>Flyweight</option>
+    </select>
+
+
+    <div class="stat">
+
+      <div class="stat-header">
+        <span>💥 Power</span>
+        <span id="powerValue">50</span>
+      </div>
+
+      <input
+        id="power"
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        oninput="updateValue('power')"
+      >
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-header">
+        <span>⚡ Speed</span>
+        <span id="speedValue">50</span>
+      </div>
+
+      <input
+        id="speed"
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        oninput="updateValue('speed')"
+      >
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-header">
+        <span>🛡️ Defense</span>
+        <span id="defenseValue">50</span>
+      </div>
+
+      <input
+        id="defense"
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        oninput="updateValue('defense')"
+      >
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-header">
+        <span>❤️ Stamina</span>
+        <span id="staminaValue">50</span>
+      </div>
+
+      <input
+        id="stamina"
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        oninput="updateValue('stamina')"
+      >
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-header">
+        <span>🧠 Ring IQ</span>
+        <span id="iqValue">50</span>
+      </div>
+
+      <input
+        id="iq"
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        oninput="updateValue('iq')"
+      >
+
+    </div>
+
+
+    <button onclick="createBoxer()">
+      🥊 Create Champion
+    </button>
+
+  </div>
+
+
+  <div class="card" id="result">
+
+    <div class="profile">
+
+      <h2 id="resultName"></h2>
+
+      <div id="resultCountry"></div>
+
+      <div class="badge" id="resultWeight"></div>
+
+      <div class="rating" id="overall"></div>
+
+      <div class="rating-label">
+        OVERALL RATING
+      </div>
+
+      <p class="record" id="record"></p>
+
+    </div>
+
+
+    <h2>Boxer Stats</h2>
+
+    <div class="stat-row">
+      <span>💥 Power</span>
+      <strong id="resultPower"></strong>
+    </div>
+
+    <div class="stat-row">
+      <span>⚡ Speed</span>
+      <strong id="resultSpeed"></strong>
+    </div>
+
+    <div class="stat-row">
+      <span>🛡️ Defense</span>
+      <strong id="resultDefense"></strong>
+    </div>
+
+    <div class="stat-row">
+      <span>❤️ Stamina</span>
+      <strong id="resultStamina"></strong>
+    </div>
+
+    <div class="stat-row">
+      <span>🧠 Ring IQ</span>
+      <strong id="resultIQ"></strong>
+    </div>
+
+    <h2>Career Projection</h2>
+
+    <p id="career"></p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+function updateValue(stat) {
+
+  const value = document.getElementById(stat).value;
+
+  document.getElementById(stat + "Value").textContent = value;
+
+}
+
+
+function createBoxer() {
+
+  const name = document.getElementById("boxerName").value.trim();
+
+  const country = document.getElementById("country").value.trim();
+
+  const weight = document.getElementById("weight").value;
+
+
+  if (!name) {
+
+    alert("Please enter your boxer's name.");
+
+    return;
+
+  }
+
+
+  const power =
+    Number(document.getElementById("power").value);
+
+  const speed =
+    Number(document.getElementById("speed").value);
+
+  const defense =
+    Number(document.getElementById("defense").value);
+
+  const stamina =
+    Number(document.getElementById("stamina").value);
+
+  const iq =
+    Number(document.getElementById("iq").value);
+
+
+  const overall = Math.round(
+    (power + speed + defense + stamina + iq) / 5
+  );
+
+
+  /*
+    Generate a fictional career based
+    on the overall rating.
+  */
+
+  let wins;
+  let losses;
+  let kos;
+
+
+  if (overall >= 90) {
+
+    wins = Math.floor(Math.random() * 8) + 35;
+
+    losses = Math.floor(Math.random() * 2);
+
+    kos = Math.floor(wins * (0.65 + Math.random() * 0.2));
+
+  }
+
+  else if (overall >= 80) {
+
+    wins = Math.floor(Math.random() * 8) + 25;
+
+    losses = Math.floor(Math.random() * 5);
+
+    kos = Math.floor(wins * (0.45 + Math.random() * 0.2));
+
+  }
+
+  else if (overall >= 70) {
+
+    wins = Math.floor(Math.random() * 8) + 18;
+
+    losses = Math.floor(Math.random() * 7);
+
+    kos = Math.floor(wins * (0.35 + Math.random() * 0.2));
+
+  }
+
+  else {
+
+    wins = Math.floor(Math.random() * 10) + 10;
+
+    losses = Math.floor(Math.random() * 10) + 1;
+
+    kos = Math.floor(wins * (0.2 + Math.random() * 0.2));
+
+  }
+
+
+  document.getElementById("resultName").textContent = name;
+
+  document.getElementById("resultCountry").textContent =
+    country ? "🌎 " + country : "🌎 Unknown";
+
+  document.getElementById("resultWeight").textContent =
+    weight;
+
+
+  document.getElementById("overall").textContent =
+    overall;
+
+
+  document.getElementById("record").textContent =
+    `${wins}-${losses}-0 (${kos} KO)`;
+
+
+  document.getElementById("resultPower").textContent =
+    power;
+
+  document.getElementById("resultSpeed").textContent =
+    speed;
+
+  document.getElementById("resultDefense").textContent =
+    defense;
+
+  document.getElementById("resultStamina").textContent =
+    stamina;
+
+  document.getElementById("resultIQ").textContent =
+    iq;
+
+
+  let careerText;
+
+
+  if (overall >= 90) {
+
+    careerText =
+      "Future Hall of Famer 🏆 — This boxer has elite-level abilities and could become a dominant world champion.";
+
+  }
+
+  else if (overall >= 80) {
+
+    careerText =
+      "World-class contender 🥊 — This boxer has the ability to compete for major world titles.";
+
+  }
+
+  else if (overall >= 70) {
+
+    careerText =
+      "Strong contender 🔥 — With the right matchups, this boxer could make a serious run at a title.";
+
+  }
+
+  else {
+
+    careerText =
+      "Developing prospect 📈 — This boxer has potential but still has room to improve.";
+
+  }
+
+
+  document.getElementById("career").textContent =
+    careerText;
+
+
+  document.getElementById("result").style.display =
+    "block";
+
+
+  document.getElementById("result").scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+</script>
+
+</body>
+</html>
