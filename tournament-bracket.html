@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoxWiki - Tournament Bracket</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-gold: #d4af37;
+            --accent-red: #ff4d4d;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .bracket-container {
+            display: flex;
+            justify-content: space-around;
+            overflow-x: auto;
+            padding: 40px 0;
+            gap: 40px;
+        }
+
+        .round {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-width: 220px;
+        }
+
+        .round-title {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .matchup {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-gold);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .fighter {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .fighter:last-child {
+            border-bottom: none;
+        }
+
+        .fighter.winner {
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .score {
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .champion-box {
+            text-align: center;
+            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            border: 2px solid var(--accent-gold);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .champion-box h3 {
+            color: var(--accent-gold);
+            margin: 0 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Heavyweight Championship Bracket</h1>
+
+    <div class="bracket-container">
+        <!-- Quarterfinals -->
+        <div class="round">
+            <div class="round-title">Quarterfinals</div>
+            <div class="matchup">
+                <div class="fighter winner"><span>M. Tyson (1986)</span> <span class="score">KO 3</span></div>
+                <div class="fighter"><span>F. Frazier (1971)</span> <span class="score">-</span></div>
+            </div>
+            <div class="matchup">
+                <div class="fighter winner"><span>M. Ali (1967)</span> <span class="score">UD</span></div>
+                <div class="fighter"><span>L. Lewis (2002)</span> <span class="score">-</span></div>
+            </div>
+            <div class="matchup">
+                <div class="fighter winner"><span>G. Foreman (1973)</span> <span class="score">KO 2</span></div>
+                <div class="fighter"><span>E. Holyfield (1990)</span> <span class="score">-</span></div>
+            </div>
+            <div class="matchup">
+                <div class="fighter winner"><span>O. Usyk (2023)</span> <span class="score">MD</span></div>
+                <div class="fighter"><span>W. Klitschko (2011)</span> <span class="score">-</span></div>
+            </div>
+        </div>
+
+        <!-- Semifinals -->
+        <div class="round">
+            <div class="round-title">Semifinals</div>
+            <div class="matchup">
+                <div class="fighter winner"><span>M. Tyson</span> <span class="score">TKO 9</span></div>
+                <div class="fighter"><span>M. Ali</span> <span class="score">-</span></div>
+            </div>
+            <div class="matchup">
+                <div class="fighter winner"><span>G. Foreman</span> <span class="score">KO 7</span></div>
+                <div class="fighter"><span>O. Usyk</span> <span class="score">-</span></div>
+            </div>
+        </div>
+
+        <!-- Finals -->
+        <div class="round">
+            <div class="round-title">Final</div>
+            <div class="matchup">
+                <div class="fighter winner"><span>M. Tyson</span> <span class="score">UD</span></div>
+                <div class="fighter"><span>G. Foreman</span> <span class="score">-</span></div>
+            </div>
+        </div>
+
+        <!-- Champion -->
+        <div class="round">
+            <div class="round-title">Tournament Champion</div>
+            <div class="champion-box">
+                <h3>👑 CHAMPION</h3>
+                <p><strong>Mike Tyson (1986)</strong></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
