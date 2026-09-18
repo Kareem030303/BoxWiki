@@ -2766,3 +2766,68 @@ function createBoxer() {
             padding: 12px;
             margin: 10px;
             font-size: 18px
+// search.js
+
+// 1. Your fighter database (Update/expand this with your actual fighters)
+const fightersList = [
+    { name: "Mike Tyson", url: "profiles.html?fighter=tyson" },
+    { name: "Muhammad Ali", url: "profiles.html?fighter=ali" },
+    { name: "George Foreman", url: "profiles.html?fighter=foreman" },
+    { name: "Joe Frazier", url: "profiles.html?fighter=frazier" },
+    { name: "Lennox Lewis", url: "profiles.html?fighter=lewis" },
+    { name: "Oleksandr Usyk", url: "profiles.html?fighter=usyk" },
+    { name: "Wladimir Klitschko", url: "profiles.html?fighter=klitschko" }
+];
+
+// Wait for the page to fully load before running the search logic
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('fighterSearch');
+    const searchResults = document.getElementById('searchResults');
+
+    // Safety check: only run if the search bar exists on the current page
+    if (!searchInput || !searchResults) return;
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+        
+        // Clear previous results
+        searchResults.innerHTML = '';
+        
+        if (query.length === 0) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        // Filter fighters based on what user typed
+        const matches = fightersList.filter(fighter => fighter.name.toLowerCase().includes(query));
+
+        if (matches.length > 0) {
+            searchResults.style.display = 'block';
+            matches.forEach(fighter => {
+                const item = document.createElement('a');
+                item.href = fighter.url;
+                item.innerText = fighter.name;
+                item.style.cssText = "display: block; padding: 10px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);";
+                
+                // Add hover effect
+                item.onmouseover = () => item.style.background = '#333';
+                item.onmouseout = () => item.style.background = 'transparent';
+                
+                searchResults.appendChild(item);
+            });
+        } else {
+            searchResults.style.display = 'block';
+            const noResult = document.createElement('div');
+            noResult.innerText = "No fighters found";
+            noResult.style.cssText = "padding: 10px; color: #888; text-align: center;";
+            searchResults.appendChild(noResult);
+        }
+    });
+
+    // Hide dropdown when clicking anywhere else on the page
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-container')) {
+            searchResults.style.display = 'none';
+        }
+    });
+});
