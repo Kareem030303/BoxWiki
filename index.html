@@ -2831,3 +2831,182 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KO-Stream | Gervonta "Tank" Davis Live PPV</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), #09090b), url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 font-sans antialiased selection:bg-red-600 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="border-b border-zinc-800 bg-zinc-950/85 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl font-black tracking-tighter text-red-600 italic">KO<span class="text-white">STREAM</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-zinc-400">
+                <a href="#stream" class="hover:text-white transition">Live Arena</a>
+                <a href="#fight-card" class="hover:text-white transition">Fight Card</a>
+                <a href="#chat" class="hover:text-white transition">Fan Chat</a>
+            </div>
+            <div>
+                <button onclick="alert('Redirecting to secure checkout...')" class="bg-red-600 hover:bg-red-700 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-full transition uppercase tracking-wider shadow-lg shadow-red-600/30">
+                    Order PPV ($79.99)
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero / Live Stream Section -->
+    <header id="stream" class="hero-bg py-12 px-4 sm:px-6 lg:px-8 border-b border-zinc-800">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- Live Tag & Title -->
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-2">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+                    </span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-red-500">PPV Broadcast Live</span>
+                </div>
+                <span class="text-xs text-zinc-400 bg-zinc-900 border border-zinc-800 px-3 py-1 rounded-full">HD 1080p 60FPS</span>
+            </div>
+
+            <!-- Video Player Container with Real Tank Davis Fight YouTube Embed -->
+            <div class="relative aspect-video bg-black rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl shadow-red-950/20 flex items-center justify-center">
+                
+                <!-- Embedded YouTube Video: Gervonta Davis vs. Frank Martin Highlights -->
+                <iframe 
+                    class="w-full h-full absolute inset-0"
+                    src="https://www.youtube.com/embed/I-gua79_nVY?autoplay=0&mute=0&controls=1" 
+                    title="Gervonta Tank Davis vs Frank Martin Highlights" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                ></iframe>
+
+            </div>
+
+            <!-- Fight Infobox Meta -->
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-zinc-900/60 border border-zinc-800/80 p-4 rounded-xl backdrop-blur-sm">
+                    <span class="text-xs text-zinc-500 uppercase font-semibold">Headliner</span>
+                    <p class="text-lg font-bold text-white mt-0.5">Gervonta "Tank" Davis</p>
+                    <p class="text-xs text-red-500 font-medium">30-0-1 (28 KOs)</p>
+                </div>
+                <div class="bg-zinc-900/60 border border-zinc-800/80 p-4 rounded-xl backdrop-blur-sm flex items-center justify-center">
+                    <div class="text-center">
+                        <span class="text-xs text-zinc-500 uppercase font-semibold">Weight Class</span>
+                        <p class="text-lg font-bold text-white mt-0.5">Lightweight / Super Lightweight</p>
+                        <span class="inline-block mt-1 text-[10px] bg-red-950 text-red-400 px-2 py-0.5 rounded border border-red-900">Championship Match</span>
+                    </div>
+                </div>
+                <div class="bg-zinc-900/60 border border-zinc-800/80 p-4 rounded-xl backdrop-blur-sm md:text-right">
+                    <span class="text-xs text-zinc-500 uppercase font-semibold">Venue</span>
+                    <p class="text-lg font-bold text-white mt-0.5">MGM Grand Garden Arena, Las Vegas</p>
+                    <p class="text-xs text-zinc-400">Main Event Replay Active</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content Section: Fight Card & Live Chat -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Fight Card Lineup -->
+            <section id="fight-card" class="lg:col-span-2 space-y-6">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-black tracking-tight text-white uppercase italic">Full Fight Card</h3>
+                    <span class="text-xs text-zinc-500">Pay-Per-View Replay</span>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-zinc-900 border border-red-900/40 p-4 rounded-xl flex items-center justify-between shadow-lg shadow-red-950/10">
+                        <div class="flex items-center space-x-4">
+                            <span class="bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded">MAIN</span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm sm:text-base">Gervonta Davis vs. Frank Martin</h4>
+                                <p class="text-xs text-zinc-400">WBA Lightweight Championship Bout (Highlights Loaded)</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-semibold text-red-500 bg-red-950/50 px-3 py-1 rounded-full border border-red-900/50">Playing Now</span>
+                    </div>
+
+                    <div class="bg-zinc-900/50 border border-zinc-800 p-4 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <span class="bg-zinc-800 text-zinc-300 text-xs font-bold px-2.5 py-1 rounded">CO-MAIN</span>
+                            <div>
+                                <h4 class="font-bold text-white text-sm sm:text-base">David Benavidez vs. Oleksandr Gvozdyk</h4>
+                                <p class="text-xs text-zinc-400">Light Heavyweight Co-Feature</p>
+                            </div>
+                        </div>
+                        <span class="text-xs text-zinc-500">Completed</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Live Chat Section -->
+            <section id="chat" class="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-4 flex flex-col h-[400px] lg:h-auto">
+                <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
+                    <h3 class="font-bold text-sm text-white uppercase tracking-wider">Live Ring Side Chat</h3>
+                    <span class="text-xs text-green-500 flex items-center gap-1 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> 1,420 online</span>
+                </div>
+
+                <div id="chat-box" class="flex-1 overflow-y-auto space-y-3 py-3 text-xs pr-1">
+                    <div><span class="text-red-500 font-bold">TankFan99:</span> That left hook is lethal man! 🥊</div>
+                    <div><span class="text-zinc-400 font-bold">BoxingBuff:</span> Tank adjusted so fast in the middle rounds.</div>
+                    <div><span class="text-blue-400 font-bold">VegasLocal:</span> Insane knockout power.</div>
+                    <div><span class="text-yellow-500 font-bold">SouthpawEra:</span> UNDEFEATED!</div>
+                </div>
+
+                <form id="chat-form" onsubmit="handleChatSubmit(event)" class="pt-3 border-t border-zinc-800 flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Say something..." autocomplete="off" class="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-red-600">
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-xs font-bold transition">Send</button>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800 py-8 bg-zinc-950 text-center text-xs text-zinc-500">
+        <p>&copy; 2026 KO-Stream Platform. Demo Frontend Template for GitHub.</p>
+    </footer>
+
+    <!-- JavaScript for Live Chat Interaction -->
+    <script>
+        function handleChatSubmit(event) {
+            event.preventDefault();
+            const input = document.getElementById('chat-input');
+            const chatBox = document.getElementById('chat-box');
+            
+            if (input.value.trim() === '') return;
+
+            const msgDiv = document.createElement('div');
+            msgDiv.innerHTML = `<span class="text-red-400 font-bold">You:</span> ${escapeHtml(input.value)}`;
+            chatBox.appendChild(msgDiv);
+
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+    </script>
+</body>
+</html>
