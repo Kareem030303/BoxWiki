@@ -1,0 +1,128 @@
+// Game State
+let gameState = {
+  stamina: 100,
+  confidence: 80,
+  fightRecord: "15-0 (12 KOs)",
+  currentChapter: 1
+};
+
+// Story Nodes
+const storyNodes = {
+  1: {
+    title: "Chapter 1: The Shadow of the Finals",
+    content: `
+      <p>The roar of the crowd still haunts the gym. Two years ago, your older brother <strong>Adrian Barnes</strong> stood at 27-0 in the National Amateur Finals before <strong>Isaiah Frost</strong> caught him with a devastating right counter in Round 3.</p>
+      <p>Adrian never fought again, transitioning to your corner. Now, at 18, you've quietly racked up a 15-0 pro record with Coach Mick Vance. Your 16-year-old brother, Alex, wraps his hands in the corner while watching you shadowbox.</p>
+      <p><em>"Frost just signed his title defense,"</em> Mick says, stepping into the ring. <em>"You want him? You gotta show the world you aren't fighting in Adrian's shadow."</em></p>
+    `,
+    choices: [
+      { text: "Focus on heavy power training to match Frost's strength", nextNode: 2, statChange: { stamina: -10, confidence: +10 } },
+      { text: "Focus on slick footwork and defense like Adrian taught you", nextNode: 2, statChange: { stamina: +10, confidence: 0 } }
+    ]
+  },
+  2: {
+    title: "Chapter 2: The Co-Main Event War",
+    content: `
+      <p>Before facing Frost, you take a mandatory title eliminator fight against veteran contender Marcos 'El Toro' Ruiz.</p>
+      <p>Round 6: Ruiz presses you against the ropes, firing heavy body hooks. Adrian yells from your corner: <em>"Pivot left and counter!"</em> while Mick yells: <em>"Bite down and trade with him!"</em></p>
+    `,
+    choices: [
+      { text: "Listen to Adrian: Pivot out and land the counter hook", nextNode: 3, statChange: { stamina: 0, confidence: +15 } },
+      { text: "Listen to Mick: Trade inside hooks to force a stoppage", nextNode: 3, statChange: { stamina: -25, confidence: +20 } }
+    ]
+  },
+  3: {
+    title: "Chapter 3: Tale of the Tape — Fight Night vs. Isaiah Frost",
+    content: `
+      <div style="background: #111; padding: 15px; border-radius: 8px; border: 1px solid #333; margin-bottom: 15px;">
+        <h4 style="color: #ff4444; text-align: center; margin-top: 0;">MAIN EVENT: WORLD TITLE</h4>
+        <div style="display: flex; justify-content: space-between; text-align: center; font-family: monospace;">
+          <div>
+            <strong style="color: #00d2ff;">Aman Barnes</strong><br>
+            Age: 18<br>
+            Record: 16-0 (13 KO)<br>
+            Reach: 72"<br>
+            Stance: Orthodox
+          </div>
+          <div style="font-weight: bold; align-self: center; font-size: 1.2rem;">VS</div>
+          <div>
+            <strong style="color: #ff4444;">Isaiah Frost</strong><br>
+            Age: 22<br>
+            Record: 18-0 (16 KO)<br>
+            Reach: 74"<br>
+            Stance: Southpaw
+          </div>
+        </div>
+      </div>
+      <p>Walkout time. Alex slaps your gloves, Adrian whispers <em>"Avenge the name,"</em> and Coach Mick hands you your mouthguard. You step into the bright lights of MGM Grand.</p>
+      <p>Round 10: Both of you are bruised. Frost steps forward with the exact same right counter setup that ended Adrian's career.</p>
+    `,
+    choices: [
+      { text: "Feint the jab, duck under his right counter, and throw a liver shot", nextNode: 4, winCondition: true },
+      { text: "Try to out-slug him with a straight right hand over the top", nextNode: 5, winCondition: false }
+    ]
+  },
+  4: {
+    title: "Chapter 4: Victory — The Barnes Dynasty",
+    content: `
+      <p><strong>KNOCKOUT!</strong> Your feint works perfectly. Frost swings at air as you slip under his right hand and sink a brutal hook into his ribcage. Frost drops to his knees and fails to beat the 10-count!</p>
+      <p>You are the new World Champion at 18 years old. Adrian climbs into the ring, pulling you and Alex into a tight embrace. The Barnes legacy is restored.</p>
+    `,
+    choices: [
+      { text: "Restart Story Mode", nextNode: 1, reset: true }
+    ]
+  },
+  5: {
+    title: "Chapter 4: Defeat — History Repeats",
+    content: `
+      <p>Frost's counter is too fast. His right hand lands cleanly on your chin before your right hand can connect. You hit the canvas hard.</p>
+      <p>Though you rise before ten, the referee stops the contest. You lost by TKO in Round 10. Adrian grabs your shoulders in the corner: <em>"Keep your head up. We learn from this. Alex is up next."</em></p>
+    `,
+    choices: [
+      { text: "Try Again (Restart)", nextNode: 1, reset: true }
+    ]
+  }
+};
+
+// Engine Logic
+function renderChapter(nodeId) {
+  const node = storyNodes[nodeId];
+  if (!node) return;
+
+  const container = document.getElementById("story-container");
+  
+  let choicesHtml = "";
+  node.choices.forEach((choice, index) => {
+    choicesHtml += `
+      <button onclick="makeChoice(${choice.nextNode}, ${index})" style="display: block; width: 100%; padding: 12px; margin-top: 10px; background: #222; color: #fff; border: 1px solid #444; border-radius: 6px; cursor: pointer; text-align: left;">
+        ▶ ${choice.text}
+      </button>
+    `;
+  });
+
+  container.innerHTML = `
+    <div style="background: #1a1a1a; color: #eee; padding: 20px; border-radius: 8px; max-width: 650px; margin: 0 auto; border: 1px solid #333;">
+      <h2 style="color: #ff4444; margin-top: 0;">${node.title}</h2>
+      <div>${node.content}</div>
+      <div style="margin-top: 20px;">${choicesHtml}</div>
+    </div>
+  `;
+}
+
+function makeChoice(nextNode, choiceIndex) {
+  const currentNode = storyNodes[gameState.currentChapter];
+  const choice = currentNode.choices[choiceIndex];
+
+  if (choice.reset) {
+    gameState.stamina = 100;
+    gameState.confidence = 80;
+  }
+
+  gameState.currentChapter = nextNode;
+  renderChapter(nextNode);
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", () => {
+  renderChapter(1);
+});
