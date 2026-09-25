@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BoxWiki - Fighters</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #080808;
+      color: white;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      background: #111;
+      border-bottom: 2px solid #292929;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #e63946;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #e63946;
+    }
+
+    /* HEADER */
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px 35px;
+      background: linear-gradient(
+        180deg,
+        #181818 0%,
+        #080808 100%
+      );
+    }
+
+    .hero h1 {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      color: #e63946;
+    }
+
+    .hero p {
+      color: #aaa;
+      font-size: 17px;
+    }
+
+    /* SEARCH */
+
+    .search-container {
+      max-width: 600px;
+      margin: 25px auto 40px;
+      padding: 0 20px;
+    }
+
+    #fighterSearch {
+      width: 100%;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      background: #151515;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    #fighterSearch:focus {
+      border-color: #e63946;
+    }
+
+    /* FIGHTER GRID */
+
+    .fighter-grid {
+      width: 92%;
+      max-width: 1400px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 25px;
+      padding-bottom: 60px;
+    }
+
+    /* CARD */
+
+    .fighter-card {
+      background: #121212;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: 0.25s ease;
+    }
+
+    .fighter-card:hover {
+      transform: translateY(-7px);
+      border-color: #e63946;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* IMAGE */
+
+    .fighter-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      background: #202020;
+    }
+
+    /* CARD INFO */
+
+    .fighter-info {
+      padding: 18px;
+    }
+
+    .fighter-info h2 {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .nickname {
+      color: #e63946;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .record {
+      color: #bbb;
+      margin-bottom: 15px;
+    }
+
+    .rating {
+      display: inline-block;
+      background: #e63946;
+      padding: 6px 10px;
+      border-radius: 7px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .profile-button {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .profile-button:hover {
+      background: #e63946;
+      color: white;
+    }
+
+    /* HIDDEN SEARCH RESULTS */
+
+    .hidden {
+      display: none;
+    }
+
+    /* FOOTER */
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #111;
+      border-top: 1px solid #292929;
+      color: #777;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .fighter-grid {
+        width: 94%;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .fighter-image {
+        height: 220px;
+      }
+
+      .fighter-info {
+        padding: 12px;
+      }
+
+      .fighter-info h2 {
+        font-size: 17px;
+      }
+
+      .nickname,
+      .record {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <div class="logo">
+      🥊 <span>Box</span>Wiki
+    </div>
+
+    <div>
+      <a href="index.html">Home</a>
+      <a href="fighters.html">Fighters</a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <h1>🥊 <span>BoxWiki</span> Fighters</h1>
+
+    <p>
+      Explore fighters from different generations of boxing.
+    </p>
+
+  </section>
+
+
+  <!-- SEARCH -->
+
+  <div class="search-container">
+
+    <input
+      type="text"
+      id="fighterSearch"
+      placeholder="🔎 Search for a fighter..."
+      onkeyup="searchFighters()"
+    >
+
+  </div>
+
+
+  <!-- FIGHTERS -->
+
+  <main class="fighter-grid" id="fighterGrid">
+
+
+    <!-- MUHAMMAD ALI -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/ali.jpg"
+        alt="Muhammad Ali"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Muhammad Ali</h2>
+
+        <p class="nickname">
+          "The Greatest"
+        </p>
+
+        <p class="record">
+          Record: 56-5
+        </p>
+
+        <div class="rating">
+          Rating: 100
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Muhammad Ali')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- NAOYA INOUE -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/inoue.jpg"
+        alt="Naoya Inoue"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Naoya Inoue</h2>
+
+        <p class="nickname">
+          "The Monster"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 98
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Naoya Inoue')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- MIKE TYSON -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/mike-tyson.jpg"
+        alt="Mike Tyson"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Mike Tyson</h2>
+
+        <p class="nickname">
+          "Iron Mike"
+        </p>
+
+        <p class="record">
+          Record: 50-6
+        </p>
+
+        <div class="rating">
+          Rating: 97
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Mike Tyson')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- TEOFIMO LOPEZ -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/teofimo.jpg"
+        alt="Teofimo Lopez"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Teofimo Lopez</h2>
+
+        <p class="nickname">
+          "The Takeover"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 92
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Teofimo Lopez')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- LOMACHENKO -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/lomachenko.jpg"
+        alt="Vasiliy Lomachenko"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Vasiliy Lomachenko</h2>
+
+        <p class="nickname">
+          "Hi-Tech"
+        </p>
+
+        <p class="record">
+          Record: 18-3
+        </p>
+
+        <div class="rating">
+          Rating: 96
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Vasiliy Lomachenko')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- RYAN GARCIA -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/ryan-garcia.jpg"
+        alt="Ryan Garcia"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Ryan Garcia</h2>
+
+        <p class="nickname">
+          "King Ry"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 91
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Ryan Garcia')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- RICHARDSON HITCHINS -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/hitchins.jpg"
+        alt="Richardson Hitchins"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Richardson Hitchins</h2>
+
+        <p class="nickname">
+          "The Expert"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 90
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Richardson Hitchins')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- SHAKUR STEVENSON -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/shakur.jpg"
+        alt="Shakur Stevenson"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Shakur Stevenson</h2>
+
+        <p class="nickname">
+          "Fearless"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 95
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Shakur Stevenson')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- DEVIN HANEY -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/haney.jpg"
+        alt="Devin Haney"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Devin Haney</h2>
+
+        <p class="nickname">
+          "The Dream"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 94
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Devin Haney')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- BAM RODRIGUEZ -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/bam.jpg"
+        alt="Jesse Rodriguez"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Jesse "Bam" Rodriguez</h2>
+
+        <p class="nickname">
+          "Bam"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 95
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Jesse Bam Rodriguez')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- GERVONTA DAVIS -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/gervonta.jpg"
+        alt="Gervonta Davis"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Gervonta Davis</h2>
+
+        <p class="nickname">
+          "Tank"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 96
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Gervonta Davis')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ROLLY ROMERO -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/rolly.jpg"
+        alt="Rolando Romero"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Rolando "Rolly" Romero</h2>
+
+        <p class="nickname">
+          "Rolly"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 88
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Rolando Romero')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- BRUCE CARRINGTON -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/bruce-carrington.jpg"
+        alt="Bruce Carrington"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Bruce Carrington</h2>
+
+        <p class="nickname">
+          "Shu Shu"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 89
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Bruce Carrington')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- TYSON FURY -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/tyson-fury.jpg"
+        alt="Tyson Fury"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Tyson Fury</h2>
+
+        <p class="nickname">
+          "The Gypsy King"
+        </p>
+
+        <p class="record">
+          Record: 34-2-1
+        </p>
+
+        <div class="rating">
+          Rating: 97
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Tyson Fury')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ANTHONY JOSHUA -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/anthony-joshua.jpg"
+        alt="Anthony Joshua"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Anthony Joshua</h2>
+
+        <p class="nickname">
+          "AJ"
+        </p>
+
+        <p class="record">
+          Record: Current
+        </p>
+
+        <div class="rating">
+          Rating: 95
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Anthony Joshua')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- DEONTAY WILDER -->
+
+    <div class="fighter-card">
+
+      <img
+        src="images/deontay-wilder.jpg"
+        alt="Deontay Wilder"
+        class="fighter-image"
+      >
+
+      <div class="fighter-info">
+
+        <h2>Deontay Wilder</h2>
+
+        <p class="nickname">
+          "The Bronze Bomber"
+        </p>
+
+        <p class="record">
+          Record: 43-4-1
+        </p>
+
+        <div class="rating">
+          Rating: 94
+        </div>
+
+        <button
+          class="profile-button"
+          onclick="showFighter('Deontay Wilder')"
+        >
+          View Fighter
+        </button>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      🥊 BoxWiki — Boxing History & Fantasy Boxing
+    </p>
+
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    function searchFighters() {
+
+      let input =
+        document.getElementById("fighterSearch")
+        .value
+        .toLowerCase();
+
+      let cards =
+        document.querySelectorAll(".fighter-card");
+
+      cards.forEach(function(card) {
+
+        let name =
+          card.querySelector("h2")
+          .textContent
+          .toLowerCase();
+
+        if (name.includes(input)) {
+
+          card.classList.remove("hidden");
+
+        } else {
+
+          card.classList.add("hidden");
+
+        }
+
+      });
+
+    }
+
+
+    function showFighter(name) {
+
+      alert(
+        "🥊 " + name +
+        "\n\nFighter profile coming soon!"
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
